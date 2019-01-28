@@ -11,8 +11,7 @@ const buttons = '<span><i class="far fa-edit"></i></span><span><i class="fas fa-
 var constructli = function( text )
 {
   var li = document.createElement('li');
-  var t = document.createTextNode(text);
-  li.appendChild(t);
+  li.innerHTML = text+buttons;
   ul.appendChild(li);
 }
 
@@ -24,7 +23,8 @@ addbtn.addEventListener("click", function(event){
     error.appendChild(t);
   }
   else {
-    error.removeChild(error.childNodes[0]);
+    if(error.childNodes[0])
+      error.removeChild(error.childNodes[0]);
     listArray.push( item.value );
     localStorage.setItem('lists', JSON.stringify(listArray));
     constructli( item.value );
@@ -37,3 +37,28 @@ addbtn.addEventListener("click", function(event){
 listArray.forEach( function( value ){
   constructli( value );
 } );
+
+
+
+
+
+editbtn.addEventListener('click', function(){
+    var liParent = this.parentNode;
+    var edittext = document.getElementById('edittext');
+    var flag = liParent.classList.contains("edit");
+    if(flag)
+    {
+      label.innerText = edittext.value;
+    }
+    else {
+      edittext.value = label.innerText;
+    }
+    liParent.classList.toggle('edit');
+});
+
+
+deletebtn.addEventListener('click', function(){
+  var liParent = this.parentNode;
+  var ul = liParent.parentNode;
+  ul.removeChild(liParent);
+});
