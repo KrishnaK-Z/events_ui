@@ -94,14 +94,14 @@ form{
 #to-do-list > li span:first-child{
   position: relative;
 }
-/* #to-do-list > li span{
+#to-do-list > li span:not(:first-child){
   position: absolute;
   right: 0;
   cursor: pointer;
 }
 #to-do-list > li span:last-child{
   right: 10%;
-} */
+}
 
 
 #edittext{
