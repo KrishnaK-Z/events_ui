@@ -5,13 +5,23 @@ var addbtn = document.getElementById('addbtn');
 var error = document.getElementById('error');
 var listArray = localStorage.getItem('lists') ?
                 JSON.parse(localStorage.getItem('lists')) : [];
+var editbtn = document.getElementById('editbtn');
+var deletebtn = document.getElementById('deletebtn');
 
-const buttons = '<span><i class="far fa-edit"></i></span><span><i class="fas fa-trash-alt"></i></span>';
+
+const buttons = '<input type="text" name="edittext" value="" class="editon" id="edittext"/><span id="editbtn"><i class="far fa-edit"></i></span><span id="deletebtn"><i class="fas fa-trash-alt"></i></span>';
 
 var constructli = function( text )
 {
   var li = document.createElement('li');
-  li.innerHTML = text+buttons;
+  var span = document.createElement('span');
+  span.innerHTML = text;
+  li.appendChild(span);
+  var deletebtn = document.createElement('span');
+  deletebtn.id = 'deletebtn';
+  deletebtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+  li.appendChild(deletebtn);
+  deletebtn.addEventListener('click', deletefunction);
   ul.appendChild(li);
 }
 
@@ -39,26 +49,12 @@ listArray.forEach( function( value ){
 } );
 
 
-
-
-
-editbtn.addEventListener('click', function(){
-    var liParent = this.parentNode;
-    var edittext = document.getElementById('edittext');
-    var flag = liParent.classList.contains("edit");
-    if(flag)
-    {
-      label.innerText = edittext.value;
-    }
-    else {
-      edittext.value = label.innerText;
-    }
-    liParent.classList.toggle('edit');
-});
-
-
-deletebtn.addEventListener('click', function(){
+var deletefunction = function(){
   var liParent = this.parentNode;
   var ul = liParent.parentNode;
   ul.removeChild(liParent);
-});
+  var deleteitem = liParent.childNodes[1];
+  var index = listArray.indexOf(deleteitem.innerText);
+  listArray.splice(index,1);
+  localStorage.setItem('lists', JSON.stringify(listArray));
+}

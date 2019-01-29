@@ -82,7 +82,7 @@ form{
   margin-top: 10%;
   padding: 15px;
 }
-#to-do-list > li{
+#to-do-list li{
   padding: 10px 0px;
   position: relative;
   border-bottom: 1px solid #00205b;
@@ -91,11 +91,26 @@ form{
   padding-bottom: 0;
   border: none;
 }
-#to-do-list > li span{
+#to-do-list > li span:first-child{
+  position: relative;
+}
+/* #to-do-list > li span{
   position: absolute;
   right: 0;
   cursor: pointer;
 }
 #to-do-list > li span:last-child{
   right: 10%;
+} */
+
+
+#edittext{
+  width: 220px;
+  padding: 10px;
+  border: 1px solid #050f2c;
+  display: none;
 }
+
+/* #edittext.editon{
+  display: inline-block;
+} */
