@@ -18,43 +18,54 @@ var constructli = function( text )
   span.innerHTML = text;
   li.appendChild(span);
   var deletebtn = document.createElement('span');
+  deletebtn.setAttribute("data-type", "delete");
   deletebtn.id = 'deletebtn';
   deletebtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
   li.appendChild(deletebtn);
-  deletebtn.addEventListener('click', deletefunction);
   ul.appendChild(li);
 }
-
-addbtn.addEventListener("click", function(event){
-  event.preventDefault();
-  if(item.value === '')
-  {
-    var t = document.createTextNode("Please Enter the list");
-    error.appendChild(t);
-  }
-  else {
-    if(error.childNodes[0])
-      error.removeChild(error.childNodes[0]);
-    listArray.push( item.value );
-    localStorage.setItem('lists', JSON.stringify(listArray));
-    constructli( item.value );
-    item.value = " ";
-  }
-
-  console.log(listArray);
-});
 
 listArray.forEach( function( value ){
   constructli( value );
 } );
 
+var main = document.getElementsByClassName("container");
+  main[0].addEventListener('click', function(event){
+  var op = event.target.parentNode.getAttribute('data-type');
+  console.log(op);
+  switch (op) {
 
-var deletefunction = function(){
-  var liParent = this.parentNode;
-  var ul = liParent.parentNode;
-  ul.removeChild(liParent);
-  var deleteitem = liParent.childNodes[1];
-  var index = listArray.indexOf(deleteitem.innerText);
-  listArray.splice(index,1);
-  localStorage.setItem('lists', JSON.stringify(listArray));
-}
+    case "add":
+            event.preventDefault();
+            if(item.value === '')
+            {
+              if(error.childNodes[0])
+                error.removeChild(error.childNodes[0]);
+              var t = document.createTextNode("Please Enter the list");
+              error.appendChild(t);
+            }
+            else {
+              if(error.childNodes[0])
+                error.removeChild(error.childNodes[0]);
+              listArray.push( item.value );
+              localStorage.setItem('lists', JSON.stringify(listArray));
+              constructli( item.value );
+              item.value = " ";
+            }
+    break;
+
+    case "delete":
+            var target = event.target.parentNode;
+            var liParent = target.parentNode;
+            var ul = liParent.parentNode;
+            ul.removeChild(liParent);
+            var deleteitem = liParent.childNodes[1];
+            var index = listArray.indexOf(deleteitem.innerText);
+            listArray.splice(index,1);
+            localStorage.setItem('lists', JSON.stringify(listArray));
+      break;
+    default:
+
+  }
+
+});
