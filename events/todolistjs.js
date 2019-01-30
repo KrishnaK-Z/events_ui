@@ -9,8 +9,6 @@ var editbtn = document.getElementById('editbtn');
 var deletebtn = document.getElementById('deletebtn');
 
 
-const buttons = '<input type="text" name="edittext" value="" class="editon" id="edittext"/><span id="editbtn"><i class="far fa-edit"></i></span><span id="deletebtn"><i class="fas fa-trash-alt"></i></span>';
-
 var constructli = function( text )
 {
   var li = document.createElement('li');
@@ -64,6 +62,7 @@ var main = document.getElementsByClassName("container");
             listArray.splice(index,1);
             localStorage.setItem('lists', JSON.stringify(listArray));
       break;
+
     default:
 
   }
