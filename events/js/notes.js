@@ -44,7 +44,7 @@ parent[0].addEventListener('click', function(event){
 
       case "show":
           let index = titleArray.indexOf(event.target.getElementsByTagName('span')[0].innerHTML);
-          console.log(parent[0].getElementsByTagName('textarea').innerHTML);
+          parent[0].getElementsByTagName('textarea')[0].value = descriptionArray[index];
           break;
   }
 });
