@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/noteslogin.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="loginWrapper">
+        <form class="" action="" method="post">
+          <div class="login-head">
+              <h2>Sign In</h2>
+          </div>
+          <div class="input-group">
+            <div class="inputWrapper">
+              <label for="email">Email</label>
+              <input type="email" name="email" value="">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="inputWrapper">
+              <label for="password">Password</label>
+              <input type="password" name="password" value="">
+              <i class="fas fa-unlock-alt"></i>
+            </div>
+            <div class="form-button">
+              <button type="submit" name="button">Submit<i class="fas fa-arrow-circle-right"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      var loginWrapper = document.getElementsByClassName('loginWrapper');
+      loginWrapper[0].addEventListener("keydown",function(event){
+        event.target.parentNode.classList.add('focused');
+      });
+    </script>
+  </body>
+</html>
