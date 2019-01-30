@@ -40,7 +40,7 @@ body{
 .noteTitle ul{
   position: relative;
   width: 100%;
-  height: 85%;
+  height: 65%;
   overflow-y: scroll;
   list-style: none;
   left: -3%;
@@ -70,12 +70,7 @@ body{
 .noteTitle ul li:hover i{
   transform: translatey(-65%);
 }
-.noteDetails{
-  width: 50%;
-  height: 100%;
-  padding: 10px;
-  background: yellow;
-}
+
 ::-webkit-scrollbar{
   width: 8px;
   background: #fff;
@@ -88,4 +83,55 @@ body{
 }
 ::-webkit-scrollbar-track{
   background: #d7d7d8;
+}
+.search-from input[type="text"]{
+  width: 70%;
+  height: 35px;
+  border: none;
+  border-bottom: 1px solid #303030;
+  outline: none;
+  padding: 10px;
+  font-size: 1.3rem;
+  box-sizing: content-box;
+}
+
+
+
+/* notes details css */
+
+.noteDetails{
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+}
+
+.noteDetails textarea{
+  width: 100%;
+  height: 90%;
+  padding: 20px;
+  resize: none;
+  font-size: 1.4rem;
+  border: 1px solid #050f2c;
+  border-radius: 20px;
+  box-shadow: 0 0 22px rgba(0, 0, 0, 0.07);
+  outline: none;
+}
+.manipulate{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.manipulate button{
+  width: 100px;
+  height: 50px;
+  outline: none;
+  border-radius: 10px;
+  background: #0c3866;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.manipulate button i{
+  padding-left: 10px;
 }

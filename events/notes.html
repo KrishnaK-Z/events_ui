@@ -5,7 +5,7 @@
     <title></title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/notes.css">
+    <link rel="stylesheet" href="css/notes.css">
   </head>
   <body>
     <div class="pageContainer">
@@ -13,6 +13,9 @@
       <div class="main">
         <div class="noteTitle">
           <h1>List of Notes</h1>
+          <form class="search-from" action="index.html" method="post">
+            <input type="text" name="Add" value="" placeholder="Add Here...">
+          </form>
           <ul>
             <li>Notes<i class="fas fa-arrow-alt-circle-right"></i></li>
             <li>Notes<i class="fas fa-arrow-alt-circle-right"></i></li>
@@ -26,7 +29,12 @@
           </ul>
         </div>
         <div class="noteDetails">
-
+          <textarea>Notes here....</textarea>
+          <div class="manipulate">
+            <button type="edit" name="edit">Edit<i class="far fa-edit"></i></button>
+            <button type="delete" name="delete">Delete<i class="far fa-trash-alt"></i></button>
+            <button type="Add" name="add">Add<i class="fas fa-plus"></i></button>
+          </div>
         </div>
       </div>
 
