@@ -1,23 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
+
 body{
   margin: 0;
   padding: 0;
-  background: url("bg2.jpg") ;
+  background: url("https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80") ;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  font-family: 'Bree Serif', serif;
 }
+
 .container{
-}
-.loginWrapper{
-  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
   min-height: 100vh;
+  overflow: hidden;
 }
-.loginWrapper form{
+
+/* Login form style */
+.loginWrapper{
   position: absolute;
   top: 50%;
-  left: 20%;
-  transform: translate(-50%,-50%);
-  margin: auto;
+  left: 10%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Register form style */
+.registerWrapper{
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  /* right: 10%; */
+  /* display: none; */
+  transform: translateY(-50%);
+}
+
+.loginWrapper form, .registerWrapper form{
   width: 400px;
   background: #fff;
   border-radius: 5px;
@@ -95,4 +115,34 @@ body{
 .inputWrapper.focused label{
   top: -15px;
   color: #ff4c4c;
+}
+
+.tap{
+  position: absolute;
+  width: 220px;
+  height: 55px;
+  transform: translate(-50%,-50%);
+  padding: 10px;
+  border: none;
+  background: #0099e5;
+  color: #fff;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  border-radius: 40px;
+  box-shadow: 0px 9px 16px 0px rgba(0,0,0,0.75);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.register-tap{
+  top: 50%;
+  left: 70%;
+}
+.tap:hover{
+  box-shadow: none;
+}
+.login-tap{
+  top: -150%;
+  left: 20%;
 }
