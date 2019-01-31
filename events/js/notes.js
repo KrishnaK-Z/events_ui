@@ -1,9 +1,9 @@
 var parent = document.getElementsByClassName('main');
 
-var titleArray = localStorage.getItem('title') ?
-                JSON.parse(localStorage.getItem('title')) : [];
-var descriptionArray = localStorage.getItem('description') ?
-                JSON.parse(localStorage.getItem('description')) : [];
+// var titleArray = localStorage.getItem('title') ?
+//                 JSON.parse(localStorage.getItem('title')) : [];
+// var descriptionArray = localStorage.getItem('description') ?
+//                 JSON.parse(localStorage.getItem('description')) : [];
 
 var ul = parent[0].getElementsByTagName('ul')[0];
 
@@ -68,16 +68,6 @@ parent[0].addEventListener('click', function(event){
   switch(type)
   {
     case "add":
-          // var title = parent[0].getElementsByTagName("input")[0];
-          // var description = parent[0].getElementsByTagName("textarea")[0];
-          // console.log(title.value);
-          // titleArray.push(title.value);
-          // localStorage.setItem('title', JSON.stringify(titleArray));
-          //
-          // descriptionArray.push(description.value);
-          // localStorage.setItem('description', JSON.stringify(descriptionArray));
-          //position: absolute;
-
           emptyspan = constructli("");
           textarea = parent[0].getElementsByTagName('textarea')[0];
           textarea.value="";
