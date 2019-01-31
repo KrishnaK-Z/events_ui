@@ -7,6 +7,10 @@ var descriptionArray = localStorage.getItem('description') ?
 
 var ul = parent[0].getElementsByTagName('ul')[0];
 
+// if(ul.getElementsByTagName('li').length === 0)
+// console.log( $(this).find("[type='" + delete + "']")  );
+
+
 var sideflag = 0;
 
 var hamburger;
@@ -72,7 +76,8 @@ parent[0].addEventListener('click', function(event){
           //
           // descriptionArray.push(description.value);
           // localStorage.setItem('description', JSON.stringify(descriptionArray));
-          //
+          //position: absolute;
+
           emptyspan = constructli("");
           textarea = parent[0].getElementsByTagName('textarea')[0];
           textarea.value="";
@@ -89,3 +94,10 @@ parent[0].addEventListener('click', function(event){
       break;
   }
 });
+
+
+// iifi
+// var obj = {
+//   "container": '#main',
+//
+// }
