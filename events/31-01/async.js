@@ -32,13 +32,73 @@ function update(obj){
 
 var id = Math.round(Math.random() * 10);
 
-console.log(id);
+// console.log(id);
 
-verifyid(id).then( obj => {
-  console.log(obj);
-  return update(obj);
-} ).then( mod => {
-  console.log(mod);
-} ).catch( err => {
-  console.error(err);
-} )
+// verifyid(id).then( obj => {
+//   console.log(obj);
+//   return update(obj);
+// } ).then( mod => {
+//   console.log(mod);
+// } ).catch( err => {
+//   console.error(err);
+// } )
+
+
+async function exe(){
+  try {
+    let obj = await verifyid(id);
+    let mod = await update(obj);
+    console.log(mod);
+  } catch (e) {
+    console.log(e);
+  } finally {
+    console.log("Executed");
+  }
+}
+
+// exe();
+
+function create(ele)
+{
+  return document.createElement(ele);
+}
+
+function append(parent, el) {
+   return parent.appendChild(el);
+ }
+
+function inner(ele, value){
+  ele.innerHTML = value;
+}
+
+async function fetchTitleId(){
+  let result = await fetch("https://jsonplaceholder.typicode.com/posts",{
+    method: "get"
+  });
+  let body = await result.json();
+  // console.log(body[7].title);
+  let ul = document.getElementById('list');
+  let newele;
+  let span,span1;
+  for(let i=0; i<body.length; i++){
+    newele = create('li');
+    span = create('span');
+    span1 = create('span');
+    inner(span1, body[i].id);
+    inner(span, body[i].title);
+    append(newele, span1);
+    append(newele,span);
+    append(ul, newele);
+  }
+}
+fetchTitleId();
+
+
+
+
+
+
+
+//promises
+//fetch
+//async await
