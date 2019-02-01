@@ -7,33 +7,33 @@ var btn = document.getElementById('registerbtn');
 
 function check(){
   if(localStorage.getItem('token'))
-  window.location = "notes.html"; 
+  window.location = "notes.html";
 }
 
-btn.addEventListener("click", function(){
-  var regform = document.getElementById("registerform");
-
-  fetch("http://192.168.100.162:3000/auth/register",{
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify(toJSONString( regform )),
-
-  }).then( function(result){
-    console.log(result);
-    return result.json();
-  } )
-  .then( (data) => {
-    if(!data.isSuccess)
-    alert(data.responseBody.errorMessage);
-    else {
-
-    }
-  } );
-
-});
+// btn.addEventListener("click", function(){
+//   var regform = document.getElementById("registerform");
+//
+//   fetch("http://192.168.100.162:3000/auth/register",{
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Accept": "application/json"
+//     },
+//     body: JSON.stringify(toJSONString( regform )),
+//
+//   }).then( function(result){
+//     console.log(result);
+//     return result.json();
+//   } )
+//   .then( (data) => {
+//     if(!data.isSuccess)
+//     alert(data.responseBody.errorMessage);
+//     else {
+//
+//     }
+//   } );
+//
+// });
 
 
 
@@ -41,6 +41,8 @@ btn.addEventListener("click", function(){
 // regform.addEventListener("submit", (event) => {
 //   console.log("gi");
 // });
+
+
 
 var logform = document.getElementById( "logform" );
 logform.addEventListener('submit', function( event ){

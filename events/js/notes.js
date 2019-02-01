@@ -6,7 +6,6 @@ var descriptionArray = localStorage.getItem('description') ?
                 JSON.parse(localStorage.getItem('description')) : [];
 
 var ul = parent[0].getElementsByTagName('ul')[0];
-console.log(descriptionArray[descriptionArray.length-1]);
 // console.log(localStorage.getItem('token'));
 
 var textarea = parent[0].getElementsByTagName('textarea')[0];
@@ -148,7 +147,7 @@ var updatenotes = (id, text) => {
     return result.json();
   } )
   .then( (data) => {
-    log(data);
+    console.log(data);
   } )
 }
 
