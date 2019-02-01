@@ -21,6 +21,7 @@ const debounce = (func, delay) => {
   }
 }
 
+let deleteli;
 
 var sideflag = 0;
 
@@ -94,14 +95,14 @@ parent[0].addEventListener('click', function(event){
 
       case "show":
           let selecteslist = event.target.parentNode;
-          console.log(selecteslist.id);
+          deleteli = event.target.parentNode;
           getNotesBy(selecteslist.id).then( (desc) => {
             textarea.value = desc;
           } );
           break;
-      case "Edit":
-          
-
+      case "delete":
+          deleteli.parentNode.removeChild(deleteli);
+          deletenote(deleteli.id);
       break;
   }
 });
@@ -151,6 +152,22 @@ var updatenotes = (id, text) => {
   } )
 }
 
+var deletenote = (id) => {
+  fetch("http://192.168.100.162:3000/notes/"+id,{
+    method: "delete",
+    headers: {
+      "Authorization": "Bearer " + localStorage.getItem('token'),
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  })
+  .then( function(result){
+    return result.json();
+  } )
+  .then( (data) => {
+    console.log(data);
+  } )
+}
 
 
 var getNotesBy = (id) => {
