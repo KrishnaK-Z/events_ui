@@ -10,45 +10,38 @@ function check(){
   window.location = "notes.html";
 }
 
-// btn.addEventListener("click", function(){
-//   var regform = document.getElementById("registerform");
-//
-//   fetch("http://192.168.100.162:3000/auth/register",{
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Accept": "application/json"
-//     },
-//     body: JSON.stringify(toJSONString( regform )),
-//
-//   }).then( function(result){
-//     console.log(result);
-//     return result.json();
-//   } )
-//   .then( (data) => {
-//     if(!data.isSuccess)
-//     alert(data.responseBody.errorMessage);
-//     else {
-//
-//     }
-//   } );
-//
-// });
+btn.addEventListener("click", function(){
+  var regform = document.getElementById("registerform");
 
+  fetch("http://192.168.100.162:3000/auth/register",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(toJSONString( regform )),
 
+  }).then( function(result){
+    console.log(result);
+    return result.json();
+  } )
+  .then( (data) => {
+    if(!data.isSuccess)
+    alert(data.responseBody.errorMessage);
+    else {
 
-// var regform = document.getElementById("registerform");
-// regform.addEventListener("submit", (event) => {
-//   console.log("gi");
-// });
+    }
+  } );
 
+});
 
 
 var logform = document.getElementById( "logform" );
+
 logform.addEventListener('submit', function( event ){
   event.preventDefault();
   var json = toJSONString( this );
-// console.log(json);
+
   fetch("http://192.168.100.162:3000/auth/login",{
     method: "POST",
     headers: {
