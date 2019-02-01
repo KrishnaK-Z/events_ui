@@ -5,6 +5,11 @@ var loginWrapper = document.getElementsByClassName('loginWrapper');
 
 var btn = document.getElementById('registerbtn');
 
+function check(){
+  if(localStorage.getItem('token'))
+  window.location = "notes.html"; 
+}
+
 btn.addEventListener("click", function(){
   var regform = document.getElementById("registerform");
 

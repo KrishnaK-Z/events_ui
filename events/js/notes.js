@@ -9,6 +9,7 @@ var ul = parent[0].getElementsByTagName('ul')[0];
 console.log(descriptionArray[descriptionArray.length-1]);
 // console.log(localStorage.getItem('token'));
 
+var textarea = parent[0].getElementsByTagName('textarea')[0];
 
 const debounce = (func, delay) => {
   let inDebounce
@@ -39,18 +40,19 @@ hamburger.addEventListener('click', function(event){
 });
 
 var emptyspan;
-var textarea;
+
 
 var constructli = function(id, title){
   var li = document.createElement('li');
   li.id = id;
   var span = document.createElement('span');
-  span.innerHTML = title;
+  span.innerHTML = ellipsify(title);
   li.appendChild(span);
   li.setAttribute("type", "show");
   var i = document.createElement('i');
   i.classList.add("far");
   i.classList.add("fa-arrow-alt-circle-right");
+  i.setAttribute( "type", "show" );
   li.appendChild(i);
   ul.appendChild(li);
   return span;
@@ -61,7 +63,7 @@ var setTitle = function(el){
 }
 
 function ellipsify (str) {
-    if (str.length > 10) {
+    if (str.length > 18) {
         return (str.substring(0, 10) + "...");
     }
     else {
@@ -76,11 +78,9 @@ parent[0].addEventListener('click', function(event){
   switch(type)
   {
     case "add":
-
-          textarea = parent[0].getElementsByTagName('textarea')[0];
           textarea.value="";
           textarea.focus();
-          
+
           addnotes("hi first notes").then( (id) => {
               emptyspan = constructli(id,"");
               textarea.addEventListener('keyup', debounce(function() {
@@ -93,11 +93,14 @@ parent[0].addEventListener('click', function(event){
       break;
 
       case "show":
-          let index = titleArray.indexOf(event.target.getElementsByTagName('span')[0].innerHTML);
-          parent[0].getElementsByTagName('textarea')[0].value = descriptionArray[index];
+          let selecteslist = event.target.parentNode;
+          console.log(selecteslist.id);
+          getNotesBy(selecteslist.id).then( (desc) => {
+            textarea.value = desc;
+          } );
           break;
       case "Edit":
-          textarea = parent[0].getElementsByTagName('textarea')[0];
+          
 
       break;
   }
@@ -147,6 +150,30 @@ var updatenotes = (id, text) => {
     log(data);
   } )
 }
+
+
+
+var getNotesBy = (id) => {
+  return new Promise( (resolve, reject) => {
+    {
+      fetch("http://192.168.100.162:3000/notes/"+id,{
+        method: "get",
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem('token'),
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        }
+      })
+      .then( function(result){
+        return result.json();
+      } )
+      .then( (data) => {
+        resolve(data.responseBody.description);
+      } )
+    }
+  } );
+}
+
 
 var getAllNodes = () => {
   fetch("http://192.168.100.162:3000/notes",{
