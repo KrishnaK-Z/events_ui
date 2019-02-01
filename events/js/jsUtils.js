@@ -24,7 +24,7 @@ function toJSONString( form ) {
     }
   }
 
-  return JSON.stringify( obj );
+  return obj ;
 }
 
 /**

@@ -1,21 +1,71 @@
+var token = [];
+
+
 var loginWrapper = document.getElementsByClassName('loginWrapper');
 
+var btn = document.getElementById('registerbtn');
 
-var form = document.getElementById( "logform" );
-form.addEventListener('submit', function( event ){
+btn.addEventListener("click", function(){
+  var regform = document.getElementById("registerform");
+
+  fetch("http://192.168.100.162:3000/auth/register",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(toJSONString( regform )),
+
+  }).then( function(result){
+    console.log(result);
+    return result.json();
+  } )
+  .then( (data) => {
+    if(!data.isSuccess)
+    alert(data.responseBody.errorMessage);
+    else {
+
+    }
+  } );
+
+});
+
+
+
+// var regform = document.getElementById("registerform");
+// regform.addEventListener("submit", (event) => {
+//   console.log("gi");
+// });
+
+var logform = document.getElementById( "logform" );
+logform.addEventListener('submit', function( event ){
   event.preventDefault();
   var json = toJSONString( this );
-  console.log(json);
-  // let result = await fetch("http://192.168.100.162:3000/auth/login",{
-  //   method: "POST",
-  //   body: JSON.stringify(data),
-  //   headers: {
-  //     "Content-Type": "application/json"
-  //   }
-  // });
-  // let body = await result.json();
-  // console.log(body);
-  // if(body.isSuccess)
+// console.log(json);
+  fetch("http://192.168.100.162:3000/auth/login",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(json),
+
+  }).then( function(result){
+    return result.json();
+  } )
+  .then( (data) => {
+
+    if(!data.isSuccess)
+    alert("Try Again!!!");
+    else {
+      console.log(data);
+      console.log(data.responseBody.token);
+      localStorage.removeItem('token');
+      localStorage.setItem('token',[data.responseBody.token]);
+      window.location = "notes.html";
+    }
+  } );
+
 });
 
 
@@ -39,25 +89,4 @@ login_tap.addEventListener('click',function(){
   loginWrapper[1].style.left = "-100%";
   login_tap.style.top = "-120%";
   register_tap.style.top = "50%";
-});
-
-// let loginbtn = document.getElementById('loginbtn');
-// loginbtn.addEventListener('click', function(event){
-//   event.preventDefault();
-//   notelogin();
-// });
-
-// async function notelogin(){
-//   var data = new FormData($('#login_form')[0]);
-//
-//
-//
-// }
-
-
-
-let registerbtn = document.getElementById('registerbtn');
-registerbtn.addEventListener('click', function(event){
-  event.preventDefault();
-
 });

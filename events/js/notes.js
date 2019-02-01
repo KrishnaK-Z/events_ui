@@ -1,14 +1,24 @@
 var parent = document.getElementsByClassName('main');
 
-// var titleArray = localStorage.getItem('title') ?
-//                 JSON.parse(localStorage.getItem('title')) : [];
-// var descriptionArray = localStorage.getItem('description') ?
-//                 JSON.parse(localStorage.getItem('description')) : [];
+var titleArray = localStorage.getItem('title') ?
+                JSON.parse(localStorage.getItem('title')) : [];
+var descriptionArray = localStorage.getItem('description') ?
+                JSON.parse(localStorage.getItem('description')) : [];
 
 var ul = parent[0].getElementsByTagName('ul')[0];
+console.log(descriptionArray[descriptionArray.length-1]);
+// console.log(localStorage.getItem('token'));
 
-// if(ul.getElementsByTagName('li').length === 0)
-// console.log( $(this).find("[type='" + delete + "']")  );
+
+const debounce = (func, delay) => {
+  let inDebounce
+  return function() {
+    const context = this
+    const args = arguments
+    clearTimeout(inDebounce)
+    inDebounce = setTimeout(() => func.apply(context, args), delay)
+  }
+}
 
 
 var sideflag = 0;
@@ -31,8 +41,9 @@ hamburger.addEventListener('click', function(event){
 var emptyspan;
 var textarea;
 
-var constructli = function(title){
+var constructli = function(id, title){
   var li = document.createElement('li');
+  li.id = id;
   var span = document.createElement('span');
   span.innerHTML = title;
   li.appendChild(span);
@@ -58,9 +69,6 @@ function ellipsify (str) {
     }
 }
 
-titleArray.forEach(function(title){
-  constructli( title );
-});
 
 parent[0].addEventListener('click', function(event){
   var type = event.target.getAttribute('type');
@@ -68,10 +76,20 @@ parent[0].addEventListener('click', function(event){
   switch(type)
   {
     case "add":
-          emptyspan = constructli("");
+
           textarea = parent[0].getElementsByTagName('textarea')[0];
           textarea.value="";
           textarea.focus();
+          
+          addnotes("hi first notes").then( (id) => {
+              emptyspan = constructli(id,"");
+              textarea.addEventListener('keyup', debounce(function() {
+                descriptionArray.push(textarea.value);
+                localStorage.setItem('description', JSON.stringify(descriptionArray));
+                updatenotes(id, descriptionArray[descriptionArray.length-1]);
+              }, 3000));
+          } );
+
       break;
 
       case "show":
@@ -86,8 +104,67 @@ parent[0].addEventListener('click', function(event){
 });
 
 
-// iifi
-// var obj = {
-//   "container": '#main',
-//
-// }
+
+var addnotes = (text) => {
+  return new Promise( (resolve, reject) => {
+    fetch("http://192.168.100.162:3000/notes",{
+      method: "post",
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        "description": text
+      })
+    })
+    .then(function(result){
+      return result.json();
+    })
+    .then( (data) => {
+      resolve(data.responseBody.id);
+    })
+  } );
+};
+
+
+var updatenotes = (id, text) => {
+  fetch("http://192.168.100.162:3000/notes/"+id,{
+    method: "put",
+    headers: {
+      "Authorization": "Bearer " + localStorage.getItem('token'),
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      "description": text
+    })
+  })
+  .then( function(result){
+    return result.json();
+  } )
+  .then( (data) => {
+    log(data);
+  } )
+}
+
+var getAllNodes = () => {
+  fetch("http://192.168.100.162:3000/notes",{
+    method: "get",
+    headers: {
+      "Authorization": "Bearer " + localStorage.getItem('token'),
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  })
+  .then( function(result){
+    return result.json();
+  } )
+  .then( (data) => {
+    if(data.isSuccess === true){
+      for(let i=0; i<data.responseBody.length; i++){
+        constructli(data.responseBody[i].id ,data.responseBody[i].description);
+      }
+    }
+  } )
+}
