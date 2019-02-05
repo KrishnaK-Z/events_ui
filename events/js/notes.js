@@ -6,7 +6,6 @@ var descriptionArray = localStorage.getItem('description') ?
                 JSON.parse(localStorage.getItem('description')) : [];
 
 var ul = parent[0].getElementsByTagName('ul')[0];
-// console.log(localStorage.getItem('token'));
 
 var textarea = parent[0].getElementsByTagName('textarea')[0];
 
@@ -74,7 +73,6 @@ function ellipsify (str) {
 
 parent[0].addEventListener('click', function(event){
   var type = event.target.getAttribute('type');
-  // console.log(type);
   switch(type)
   {
     case "add":

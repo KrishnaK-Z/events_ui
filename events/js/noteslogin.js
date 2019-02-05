@@ -20,7 +20,7 @@ btn.addEventListener("click", function(){
       "Accept": "application/json"
     },
     body: JSON.stringify(toJSONString( regform )),
-
+data-type
   }).then( function(result){
     console.log(result);
     return result.json();
@@ -72,7 +72,7 @@ logform.addEventListener('submit', function( event ){
 for( var i=0;i<loginWrapper.length; i++ ){
   loginWrapper[i].addEventListener("keydown",function(event){
     event.target.parentNode.classList.add('focused');
-  });
+  });method:
 }
 
 var register_tap = document.getElementById('register-tap');
